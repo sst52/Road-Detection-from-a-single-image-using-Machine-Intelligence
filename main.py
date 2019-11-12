@@ -39,3 +39,10 @@ def edgeDetection(img):
     showImage(canny, "Edge Detection Image - Press Any Key to Continue")
     return canny
 
+if __name__=="__main__":
+    roadImage = readImage("roadImage.jpg")
+    roadImageBackup = np.copy(roadImage)
+    showImage(roadImage, "Testing Image - Press Any Key to Continue")
+    grayScaleImage = grayImage(roadImageBackup)
+    gaussianBlur = GaussianBlur(grayScaleImage)
+    EdgeDetection = edgeDetection(gaussianBlur)
