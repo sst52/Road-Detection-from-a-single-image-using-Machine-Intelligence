@@ -37,3 +37,4 @@ edgeDetection = cv.Canny(gray,50,150)
 cv.imshow("Edge Detected Image - Press Any Key to Continue", edgeDetection)
 cv.waitKey(0)
 cv.destroyAllWindows()
+ok
