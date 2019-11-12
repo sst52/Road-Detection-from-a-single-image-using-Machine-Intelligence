@@ -13,6 +13,7 @@ Created on Sun Nov 10 22:06:44 2019
 
 import cv2 as cv
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def readImage(imageName):
@@ -39,6 +40,10 @@ def edgeDetection(img):
     showImage(canny, "Edge Detection Image - Press Any Key to Continue")
     return canny
 
+def graphShow(img):
+    plt.imshow(img)
+    plt.show()
+
 if __name__=="__main__":
     roadImage = readImage("roadImage.jpg")
     roadImageBackup = np.copy(roadImage)
@@ -46,3 +51,4 @@ if __name__=="__main__":
     grayScaleImage = grayImage(roadImageBackup)
     gaussianBlur = GaussianBlur(grayScaleImage)
     EdgeDetection = edgeDetection(gaussianBlur)
+    graphShow(EdgeDetection)
