@@ -44,12 +44,18 @@ def graphShow(img):
     plt.imshow(img)
     plt.show()
 
-def regionOfInterest(img):
+# Manual technique to find the mask of an image - Finding mask manually
+def findingMask(img):
     height = img.shape[0]
     trianglePolygon = np.array([[(200,height), (1100,height), (600,300)]])
     mask = np.zeros_like(img) # creates array same shape as image of zeros
     cv.fillPoly(mask, trianglePolygon, color = 255) #color 255 is white
     return mask
+
+def regionOfInterest(img):
+    mask = findingMask(img)
+    roadDetectedImage = cv.bitwise_and(img, mask)
+    return roadDetectedImage
 
 if __name__=="__main__":
     roadImage = readImage("roadImage.jpg")
@@ -60,6 +66,7 @@ if __name__=="__main__":
     EdgeDetection = edgeDetection(gaussianBlur)
     graphShow(EdgeDetection)
     # roadImage.shape[0] = Height (Maximum y) and roadImage.shape[1] = Width (Maximum x)
-    regionPlotted = regionOfInterest(EdgeDetection)
-    graphShow(regionPlotted)
+    
+    detectedImage = regionOfInterest(EdgeDetection)
+    showImage(detectedImage, "Road Detected Manually by AND operation on masking and image - Press Any Key to Continue")
     
