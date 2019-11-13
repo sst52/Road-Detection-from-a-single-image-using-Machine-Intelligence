@@ -65,6 +65,7 @@ if __name__=="__main__":
     gaussianBlur = GaussianBlur(grayScaleImage)
     EdgeDetection = edgeDetection(gaussianBlur)
     graphShow(EdgeDetection)
+    print(7*" "+"Canny Edges plotted on graph")
     # roadImage.shape[0] = Height (Maximum y) and roadImage.shape[1] = Width (Maximum x)
     
     detectedImage = regionOfInterest(EdgeDetection)
