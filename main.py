@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Nov 10 22:06:44 2019
+Created on Sun Oct 10 22:06:44 2019
 
 @author: saitej
 """
+
+'''
 !pip install numpy
 !pip install matplotlib
 !pip install opencv-python
 !pip install opencv-contrib-python
 #!pip install opencv-python-headless
 #!pip install opencv-contrib-python-headless
+'''
+
 
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os
 
 def readImage(imageName):
     img = cv.imread(imageName)
@@ -73,6 +77,9 @@ def displayFoundLinesOnRealImage(originalImg, linedImg):
     return finalImage
 
 if __name__=="__main__":
+    os.system("pip install numpy")
+    os.system("pip install matplotlib")
+    os.system("pip install opencv-contrib-python")
     roadImage = readImage("roadImage.jpg")
     roadImageBackup = np.copy(roadImage)
     showImage(roadImage, "Testing Image - Press Any Key to Continue")
@@ -92,4 +99,3 @@ if __name__=="__main__":
     showImage(onlyLines, "Lines detected by hough transform space - Press Any Key to Continue")
     finalImage = displayFoundLinesOnRealImage(roadImageBackup,onlyLines)
     showImage(finalImage, "Final Image with lines detected by hough transform space - Press Any Key to Continue")
-    
