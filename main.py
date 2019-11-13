@@ -68,7 +68,9 @@ def displayFoundLines(img, lines):
             cv.line(onlyLines, (x1, y1), (x2,y2), (128,0,64), 5) #Drawing Line on an Image and 255,154,100 is color of the line and thickness of a line
     return onlyLines
 
-def displayFoundLinesOnRealImage(img, )
+def displayFoundLinesOnRealImage(originalImg, linedImg):
+    finalImage = cv.addWeighted(originalImg, 0.7, linedImg, 1, 1)
+    return finalImage
 
 if __name__=="__main__":
     roadImage = readImage("roadImage.jpg")
@@ -87,5 +89,7 @@ if __name__=="__main__":
     lines = cv.HoughLinesP(detectedImageWithAreaOfInterest, 2, np.pi/180, 100, np.array([]), minLineLength = 40, maxLineGap = 5) # r=2, theta and threshold
     #showImage(detectedImageWithAreaOfInterest, "Hough Transform Space for Detecting lines in an Image - Press Any Key to Continue")
     onlyLines = displayFoundLines(roadImageBackup, lines)
-    showImage(onlyLines, "Final Image with lines detected by hough transform space - Press Any Key to Continue")
+    showImage(onlyLines, "Lines detected by hough transform space - Press Any Key to Continue")
+    finalImage = displayFoundLinesOnRealImage(roadImageBackup,onlyLines)
+    showImage(finalImage, "Final Image with lines detected by hough transform space - Press Any Key to Continue")
     
