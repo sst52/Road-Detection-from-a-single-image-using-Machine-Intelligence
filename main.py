@@ -52,4 +52,4 @@ if __name__=="__main__":
     gaussianBlur = GaussianBlur(grayScaleImage)
     EdgeDetection = edgeDetection(gaussianBlur)
     graphShow(EdgeDetection)
-    
+    25
