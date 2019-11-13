@@ -57,6 +57,19 @@ def regionOfInterest(img):
     roadDetectedImage = cv.bitwise_and(img, mask)
     return roadDetectedImage
 
+def displayFoundLines(img, lines):
+    #finalImage = np.copy(img)
+    onlyLines = np.zeros_like(img)
+    print("Lines Detected in an Image usign Hough Transfrom Space are : \n")
+    if lines is not None:
+        for eachLine in lines:
+            print(eachLine)
+            x1, y1, x2, y2 = eachLine.reshape(4)
+            cv.line(onlyLines, (x1, y1), (x2,y2), (128,0,64), 5) #Drawing Line on an Image and 255,154,100 is color of the line and thickness of a line
+    return onlyLines
+
+def displayFoundLinesOnRealImage(img, )
+
 if __name__=="__main__":
     roadImage = readImage("roadImage.jpg")
     roadImageBackup = np.copy(roadImage)
@@ -65,11 +78,14 @@ if __name__=="__main__":
     gaussianBlur = GaussianBlur(grayScaleImage)
     EdgeDetection = edgeDetection(gaussianBlur)
     graphShow(EdgeDetection)
-    print(7*" "+"Canny Edges plotted on graph")
+    print(7*" "+"Canny Edges plotted on graph"+3*"\n")
     # roadImage.shape[0] = Height (Maximum y) and roadImage.shape[1] = Width (Maximum x)
     
     detectedImageWithAreaOfInterest = regionOfInterest(EdgeDetection)
     showImage(detectedImageWithAreaOfInterest, "Road Detected Manually by AND operation on masking and image - Press Any Key to Continue")
     
     lines = cv.HoughLinesP(detectedImageWithAreaOfInterest, 2, np.pi/180, 100, np.array([]), minLineLength = 40, maxLineGap = 5) # r=2, theta and threshold
-    showImage(detectedImageWithAreaOfInterest, "Hough Transform Space for Detecting lines in an Image - Press Any Key to Continue")
+    #showImage(detectedImageWithAreaOfInterest, "Hough Transform Space for Detecting lines in an Image - Press Any Key to Continue")
+    onlyLines = displayFoundLines(roadImageBackup, lines)
+    showImage(onlyLines, "Final Image with lines detected by hough transform space - Press Any Key to Continue")
+    
