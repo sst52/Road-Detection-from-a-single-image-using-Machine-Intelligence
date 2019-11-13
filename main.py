@@ -44,6 +44,9 @@ def graphShow(img):
     plt.imshow(img)
     plt.show()
 
+def regionOfInterest(img):
+    triangle = np.array([200,300])
+
 if __name__=="__main__":
     roadImage = readImage("roadImage.jpg")
     roadImageBackup = np.copy(roadImage)
@@ -52,4 +55,4 @@ if __name__=="__main__":
     gaussianBlur = GaussianBlur(grayScaleImage)
     EdgeDetection = edgeDetection(gaussianBlur)
     graphShow(EdgeDetection)
-    25
+    print(roadImage.shape[1])
