@@ -45,7 +45,11 @@ def graphShow(img):
     plt.show()
 
 def regionOfInterest(img):
-    triangle = np.array([200,300])
+    height = img.shape[0]
+    trianglePolygon = np.array([[(200,height), (1100,height), (550,250)]])
+    mask = np.zeros_like(img) # creates array same shape as image of zeros
+    cv.fillPoly(mask, trianglePolygon, color = 255) #color 255 is white
+    return mask
 
 if __name__=="__main__":
     roadImage = readImage("roadImage.jpg")
@@ -55,4 +59,6 @@ if __name__=="__main__":
     gaussianBlur = GaussianBlur(grayScaleImage)
     EdgeDetection = edgeDetection(gaussianBlur)
     graphShow(EdgeDetection)
-    print(roadImage.shape[1])
+    # roadImage.shape[0] = Height (Maximum y) and roadImage.shape[1] = Width (Maximum x)
+    regionPlotted = regionOfInterest(EdgeDetection)
+    graphShow(regionPlotted)
