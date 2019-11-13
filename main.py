@@ -68,6 +68,8 @@ if __name__=="__main__":
     print(7*" "+"Canny Edges plotted on graph")
     # roadImage.shape[0] = Height (Maximum y) and roadImage.shape[1] = Width (Maximum x)
     
-    detectedImage = regionOfInterest(EdgeDetection)
-    showImage(detectedImage, "Road Detected Manually by AND operation on masking and image - Press Any Key to Continue")
+    detectedImageWithAreaOfInterest = regionOfInterest(EdgeDetection)
+    showImage(detectedImageWithAreaOfInterest, "Road Detected Manually by AND operation on masking and image - Press Any Key to Continue")
     
+    lines = cv.HoughLinesP(detectedImageWithAreaOfInterest, 2, np.pi/180, 100, np.array([]), minLineLength = 40, maxLineGap = 5) # r=2, theta and threshold
+    showImage(detectedImageWithAreaOfInterest, "Hough Transform Space for Detecting lines in an Image - Press Any Key to Continue")
