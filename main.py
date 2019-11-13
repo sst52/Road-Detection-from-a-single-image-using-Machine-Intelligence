@@ -46,7 +46,7 @@ def graphShow(img):
 
 def regionOfInterest(img):
     height = img.shape[0]
-    trianglePolygon = np.array([[(200,height), (1100,height), (550,250)]])
+    trianglePolygon = np.array([[(200,height), (1100,height), (600,300)]])
     mask = np.zeros_like(img) # creates array same shape as image of zeros
     cv.fillPoly(mask, trianglePolygon, color = 255) #color 255 is white
     return mask
@@ -62,3 +62,4 @@ if __name__=="__main__":
     # roadImage.shape[0] = Height (Maximum y) and roadImage.shape[1] = Width (Maximum x)
     regionPlotted = regionOfInterest(EdgeDetection)
     graphShow(regionPlotted)
+    
